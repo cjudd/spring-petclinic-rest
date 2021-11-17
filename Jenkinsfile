@@ -1,0 +1,45 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Test') {
+      steps {
+        sh './mvnw test'
+      }
+    }
+
+    stage('Build') {
+      steps {
+      	sh './mvnw package -DskipTests'
+      }
+    }
+
+    stage('Code Analysis'){
+      steps {
+        sh './mvnw jacoco:report'
+        // sh './mvnw jacoco:check'
+      }	
+    }
+  }
+
+  post {
+    always {
+      echo 'DONE'
+      junit testResults: 'target/surefire-reports/TEST-com.manifestcorp.demo.DemoApplicationTests.xml'
+    }
+
+    success {
+      echo 'SUCCESS'
+    }
+
+    failure {
+      echo 'FAILURE'
+      // mail body: '<b>Job Failed</b>',
+      //   from: '',
+      //   mimeType: 'text/html',
+      //   replyTo: '',
+      //   subject: "JOB FAILURE: ${env.JOB_NAME} - #${env.BUILD_NUMBER}", 
+      //   to: '';   
+    }
+  }
+}
