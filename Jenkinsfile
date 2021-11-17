@@ -25,7 +25,7 @@ pipeline {
   post {
     always {
       echo 'DONE'
-      junit testResults: 'target/surefire-reports/TEST-com.manifestcorp.demo.DemoApplicationTests.xml'
+      junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
     }
 
     success {
