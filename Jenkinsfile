@@ -26,6 +26,12 @@ pipeline {
     always {
       echo 'DONE'
       junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+      jacoco( 
+        execPattern: 'target/*.exec',
+        classPattern: 'target/classes',
+        sourcePattern: 'src/main/java',
+        exclusionPattern: 'src/test*'
+      )
     }
 
     success {
