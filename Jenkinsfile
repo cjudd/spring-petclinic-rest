@@ -39,7 +39,8 @@ pipeline {
       //   mimeType: 'text/html',
       //   replyTo: '',
       //   subject: "JOB FAILURE: ${env.JOB_NAME} - #${env.BUILD_NUMBER}", 
-      //   to: '';   
+      //   to: ''; 
+      //  
     }
   }
 }
