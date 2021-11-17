@@ -25,7 +25,7 @@ pipeline {
   post {
     always {
       echo 'DONE'
-      junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+      junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
       jacoco( 
         execPattern: 'target/*.exec',
         classPattern: 'target/classes',
